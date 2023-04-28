@@ -1,0 +1,15 @@
+---
+- hosts: all 
+  become: true
+  tasks:
+    - name: "Install bat"
+      apt:
+        update_cache: yes
+        name:
+          - bat
+        state: latest
+    - name: "Install Starship"
+      uri:
+        url: 'https://starship.rs/install.sh'
+        method: GET
+        register: result
