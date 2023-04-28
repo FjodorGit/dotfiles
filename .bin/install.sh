@@ -9,7 +9,7 @@ setupconfig checkout
 #running ansible script
 echo "Installing ansible...";
 cd .bin
-sudo apt install ansible
+sudo apt install ansible -y
 echo "Installed ansible";
 
 ansible-playbook setup.yml
