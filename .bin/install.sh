@@ -7,6 +7,7 @@ setupconfig config status.showUntrackedFiles no
 setupconfig checkout
 
 #running ansible script
+sudo head -20 /etc/ansible/hosts
 echo "Installing ansible...";
 cd .bin
 sudo apt install ansible -y
