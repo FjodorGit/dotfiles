@@ -3,10 +3,11 @@ function setupconfig {
    /usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME $@
 }
 echo "Checked out config.";
-config config status.showUntrackedFiles no
-config checkout
+setupconfig config status.showUntrackedFiles no
+setupconfig checkout
 
 #running ansible script
+echo "Installing ansible...";
 cd .bin
 sudo apt install ansible
 echo "Installed ansible";
