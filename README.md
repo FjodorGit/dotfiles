@@ -4,7 +4,7 @@ Fjodor dotfiles
 Run
 
 ```
-curl -Lks https://github.com/FjodorGit/dotfiles/master/.bin/install.sh | /bin/bash
+curl -Lks https://raw.githubusercontent.com/FjodorGit/dotfiles/master/.bin/install.sh | /bin/bash
 ```
 
 to install the setup
