@@ -103,7 +103,7 @@ export PYTHONPATH="/mnt/c/Users/Fjodor Kholodkov/source/repos/LazyJANA"
 #
 # aliases
 alias zshconfig="nvim ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
+alias ohmyzsh="nvim ~/.oh-my-zsh"
 alias nvimconfig="nvim ~/.config/nvim/lua/user/"
 alias fd="fdfind"
 alias python="/bin/python3.11"
