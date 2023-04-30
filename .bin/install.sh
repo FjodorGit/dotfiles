@@ -6,13 +6,10 @@ echo "Checked out config.";
 setupconfig config status.showUntrackedFiles no
 setupconfig checkout
 
-#appending 'localhost' to the  1 first line in the hosts file
-sudo sed -i '12 i localhost' /etc/ansible/hosts
-
 #running ansible script
 echo "Installing ansible...";
 cd .bin
 sudo apt install ansible -y
 echo "Installed ansible";
 
-ansible-playbook setup.yml
+ansible-playbook -c=local -i localhost, .bin/setup.yml

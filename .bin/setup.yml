@@ -9,6 +9,12 @@
         name:
           - bat
         state: latest
+    - name: "Install exa"
+      apt:
+        update_cache: yes
+        name:
+          - exa
+        state: latest
     - name: "Install Starship"
       uri:
         url: 'https://starship.rs/install.sh'
