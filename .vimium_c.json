@@ -1,0 +1,34 @@
+{
+	"name": "Vimium C",
+	"@time": "5/8/2023, 2:46:39 PM",
+	"time": 1683549999189,
+	"environment": {
+		"extension": "1.99.99",
+		"platform": "linux",
+		"chromium": 112
+	},
+	"allBrowserUrls": true,
+	"exclusionRules": [
+		{
+			"passKeys": "o r ",
+			"pattern": ":https://monkeytype.com/"
+		}
+	],
+	"grabBackFocus": true,
+	"keyLayout": 2,
+	"keyMappings": [
+		"#!no-check",
+		"unmap T",
+		"unmap t",
+		"unmap ^",
+		"map t Vomnibar.activateTabs",
+		"map _ visitPreviousTab",
+		"map <c-h> Vomnibar.activateHistoryInNewTab",
+		"unmap J",
+		"unmap K",
+		"map <c-n> previousTab",
+		"map <c-p> nextTab",
+		""
+	],
+	"vimSync": true
+}
