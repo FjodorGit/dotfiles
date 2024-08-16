@@ -1,0 +1,38 @@
+- name: Install curl (for starship installation)
+  become: true
+  ansible.builtin.package:
+    state: latest
+    name: curl
+
+- name: Install Zsh
+  become: true
+  ansible.builtin.package:
+    name: zsh
+    state: latest
+
+- name: Set Zsh as default shell
+  become: true
+  ansible.builtin.user:
+    name: "{{ ansible_user }}"
+    shell: /usr/bin/zsh
+
+- name: Verify Zsh installation
+  ansible.builtin.shell: zsh --version
+  changed_when: false
+
+- name: Get starship install script
+  ansible.builtin.get_url:
+    url: https://starship.rs/install.sh
+    dest: /tmp/starship_install.sh
+    mode: '0755'
+  register: starship_installation_script
+
+- name: Install starship with installation script
+  become: true
+  ansible.builtin.shell:
+    cmd: /tmp/starship_install.sh --yes
+    executable: /bin/sh
+
+- name: Assert starship is installed
+  ansible.builtin.shell: starship --version
+  changed_when: false
