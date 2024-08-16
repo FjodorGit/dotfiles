@@ -3,6 +3,7 @@
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
+export LC_ALL=en_US.UTF-8
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -70,18 +71,72 @@ ZSH_THEME="robbyrussell"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
+plugins=(git fzf-zsh-plugin)
 
 source $ZSH/oh-my-zsh.sh
 
+# Set XDG-varaibles
+export XDG_DATA_HOME="$HOME/.local/share"
+export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_STATE_HOME="$HOME/.local/state/share"
+export XDG_CACHE_HOME="$HOME/.cache"
+
+# History settings
+HISTFILE="$XDG_STATE_HOME/zsh/.zsh_history"
+HISTSIZE=500000
+SAVEHIST=500000
+setopt appendhistory
+setopt INC_APPEND_HISTORY  
+setopt SHARE_HISTORY
 # User configuration
 
 # export MANPATH="/usr/local/man:$MANPATH"
 export PATH="/home/fjk/neovim/bin:$PATH"
 export PATH="/home/fjk/.cargo/bin:$PATH"
 export PATH="/home/fjk/.local/bin:$PATH"
+export PATH="/home/fjk/.ghcup/bin:$PATH"
+export PATH="/home/fjk/.exercism/:$PATH"
+export PATH="/home/fjk/.bazel/bin:$PATH"
+export PATH="/home/fjk/.scip/bin:$PATH"
+export PATH="/usr/local/pgsql/bin:$PATH"
+export PATH="/home/fjk/julia/bin:$PATH"
+export PATH="/opt/gurobi1100/linux64/bin:$PATH"
+export PATH="/opt/gurobi952/linux64/bin:$PATH"
+export PATH="/home/fjk/Coding/wabt/build:$PATH"
+export PATH="/home/fjk/.gdrive:$PATH"
+export PATH="/home/fjk/.geckodriver:$PATH"
+export PATH="/home/fjk/.firefox:$PATH"
+export PATH="/home/fjk/.chromedriver:$PATH"
+export PATH="/home/fjk/.syncthing:$PATH"
+export PATH="/home/fjk/Postman/:$PATH"
+export PATH="/home/fjk/.local/kitty.app/bin/:$PATH"
 
-export PYTHONPATH="/mnt/c/Users/Fjodor Kholodkov/source/repos/LazyJANA"
+export QT_QPA_PLATFORM=wayland
+export SUDO_EDITOR="/home/fjk/neovim/bin/nvim"
+
+export GUROBI_HOME="/opt/gurobi952/linux64"
+
+export XDG_DATA_DIRS="/var/lib/flatpak/exports/share:$XDG_DATA_DIRS"
+export XDG_DATA_DIRS="/home/fjk/.local/share/flatpak/exports/share:$XDG_DATA_DIRS"
+
+#Alpaca API Keys
+export APCA_API_KEY_ID=PKUUBLH246T0PAIW9103
+export APCA_API_SECRET_KEY=gsXOs6G4cD3ds4F7NNFbwGG7X9bAfdGKTu3xKb6R
+
+#obsidian api key
+export OBSIDIAN_REST_API_KEY=3499d691621822ea827bae5de651ae78ae7cc2af4b905a007527a59311bd3168
+
+#for editing with neovim
+export VISUAL="/home/fjk/neovim/bin/nvim"
+export EDITOR="/home/fjk/neovim/bin/nvim"
+
+# for linker to find libraries
+export LD_LIBRARY_PATH="/home/fjk/.scip/lib:$LIBRARY_PATH"
+export LD_LIBRARY_PATH="/opt/gurobi1100/linux64/lib:$LD_LIBRARY_PATH"
+export LD_LIBRARY_PATH="/opt/gurobi952/linux64/lib:$LD_LIBRARY_PATH"
+
+# zoxide
+export _ZO_ECHO=1
 
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
@@ -102,12 +157,72 @@ export PYTHONPATH="/mnt/c/Users/Fjodor Kholodkov/source/repos/LazyJANA"
 # For a full list of active aliases, run `alias`.
 #
 # aliases
-alias zshconfig="nvim ~/.zshrc"
+alias refresh="source ~/.config/zsh/.zshrc"
+alias zshconfig="nvim ~/.config/zsh/.zshrc"
+alias kittyconfig="nvim /home/fjk/.config/kitty/kitty.conf"
+alias cat="bat"
 alias ohmyzsh="nvim ~/.oh-my-zsh"
-alias nvimconfig="nvim ~/.config/nvim/lua/user/"
+alias qn="cd ~/Documents/Obsidian\ Vault && nvim Dump.md && -"
+alias notes="cd ~/Documents/Obsidian\ Vault/ && nvim Dump.md"
+alias nvimconfig="cd ~/.config/nvim && nvim init.lua"
 alias fd="fdfind"
-alias python="/bin/python3.11"
+alias ls="eza -1 -l --icons -a"
 alias setupconfig='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
+alias sups='wakeonlan -p 51821 -i 77.24.121.5 3C:EC:EF:90:A4:42'
+alias tordownloads='cd /home/fjk/.local/share/torbrowser/tbb/x86_64/tor-browser_en-US/Browser/Downloads/'
+alias clang='clang-17'
+
+################## 
+# start ssh-agent automatically
+env=~/.ssh/agent.env
+
+agent_load_env () { test -f "$env" && . "$env" >| /dev/null ; }
+
+agent_start () {
+    (umask 077; ssh-agent >| "$env")
+    . "$env" >| /dev/null ; }
+
+agent_load_env
+
+# agent_run_state: 0=agent running w/ key; 1=agent w/o key; 2= agent not running
+agent_run_state=$(ssh-add -l >| /dev/null 2>&1; echo $?)
+
+if [ ! "$SSH_AUTH_SOCK" ] || [ $agent_run_state = 2 ]; then
+    agent_start
+    ssh-add
+elif [ "$SSH_AUTH_SOCK" ] && [ $agent_run_state = 1 ]; then
+    ssh-add
+fi
+
+unset env
+###################
+#Calling yazi and changig cwd with yazi
+function f() {
+	tmp="$(mktemp -t "yazi-cwd.XXXXX")"
+	yazi "$@" --cwd-file="$tmp"
+	if cwd="$(cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
+		cd -- "$cwd"
+	fi
+	rm -f -- "$tmp"
+}
 
 #acivates starship
 eval "$(starship init zsh)"
+
+#activates zoxide
+eval "$(zoxide init zsh)"
+
+#[ -f "/home/fjk/.ghcup/env" ] && source "/home/fjk/.ghcup/env" # ghcup-env
+
+[ -f "/home/fjk/.ghcup/env" ] && source "/home/fjk/.ghcup/env" # ghcup-env
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# Wasmer
+export WASMER_DIR="/home/fjk/.wasmer"
+[ -s "$WASMER_DIR/wasmer.sh" ] && source "$WASMER_DIR/wasmer.sh"
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+compinit -d "$XDG_CACHE_HOME"/zsh/zcompdump-"$ZSH_VERSION"
