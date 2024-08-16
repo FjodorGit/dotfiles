@@ -24,8 +24,3 @@
           - cmake
         state: latest
     - import_tasks: setup_zsh.yml
-    - name: "Install Starship"
-      uri:
-        url: 'https://starship.rs/install.sh'
-        method: GET
-        register: result

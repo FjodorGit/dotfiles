@@ -16,6 +16,14 @@
     name: "{{ ansible_user }}"
     shell: /usr/bin/zsh
 
+- name: "Add a line to /etc/zsh/zshenv"
+  lineinfile:
+    path: /etc/zsh/zshenv
+    line: 'export ZDOTDIR="~/.config/zsh"'
+    create: no
+    state: present
+    insertafter: EOF  # Ensure the line is added at the end of the file
+
 - name: Verify Zsh installation
   ansible.builtin.shell: zsh --version
   changed_when: false
