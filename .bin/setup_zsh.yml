@@ -30,7 +30,8 @@
 
 - name: Install Oh My Zsh
   ansible.builtin.shell: sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-  creates: "~/.oh-my-zsh"
+  args:
+    creates: "~/.oh-my-zsh"
 
 - name: Get starship install script
   ansible.builtin.get_url:
