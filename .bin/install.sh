@@ -1,3 +1,6 @@
+# update first
+apt-get update
+
 git clone --bare https://github.com/FjodorGit/dotfiles $HOME/.cfg
 function setupconfig {
    /usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME $@
