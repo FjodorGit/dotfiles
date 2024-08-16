@@ -12,4 +12,4 @@ cd .bin
 sudo apt install ansible -y
 echo "Installed ansible";
 
-ansible-playbook -c=local -i localhost, .bin/setup.yml
+ansible-playbook -c=local -i localhost, ~/.bin/setup.yml

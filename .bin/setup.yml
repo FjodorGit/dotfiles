@@ -15,6 +15,12 @@
         name:
           - exa
         state: latest
+    - name: "Install cmake"
+      apt:
+        update_cache: yes
+        name:
+          - cmake
+        state: latest
     - name: "Install Starship"
       uri:
         url: 'https://starship.rs/install.sh'

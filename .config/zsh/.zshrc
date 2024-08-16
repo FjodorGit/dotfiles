@@ -82,7 +82,8 @@ export XDG_STATE_HOME="$HOME/.local/state/share"
 export XDG_CACHE_HOME="$HOME/.cache"
 
 # History settings
-HISTFILE="$XDG_STATE_HOME/zsh/.zsh_history"
+export HISTFILE="$XDG_STATE_HOME/zsh/history"
+
 HISTSIZE=500000
 SAVEHIST=500000
 setopt appendhistory
@@ -225,4 +226,6 @@ export WASMER_DIR="/home/fjk/.wasmer"
 [ -s "$WASMER_DIR/wasmer.sh" ] && source "$WASMER_DIR/wasmer.sh"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# Store autocompletion data in .cache directory
 compinit -d "$XDG_CACHE_HOME"/zsh/zcompdump-"$ZSH_VERSION"
