@@ -1,3 +1,7 @@
+- name: Retrieve the current user's name
+  set_fact:
+    current_user: "{{ lookup('env', 'USER') }}"
+
 - name: Install curl (for starship installation)
   become: true
   ansible.builtin.package:
@@ -19,7 +23,7 @@
 - name: "Add a line to /etc/zsh/zshenv"
   lineinfile:
     path: /etc/zsh/zshenv
-    line: 'export ZDOTDIR="~/.config/zsh"'
+    line: 'export ZDOTDIR="/home/{{ current_user }}/.config/zsh"'
     create: no
     state: present
     insertafter: EOF  # Ensure the line is added at the end of the file
@@ -31,7 +35,7 @@
 - name: Install Oh My Zsh
   ansible.builtin.shell: sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
   args:
-    creates: "~/.oh-my-zsh"
+    creates: "/home/{{ current_user }}/.oh-my-zsh"
 
 - name: Get starship install script
   ansible.builtin.get_url:
