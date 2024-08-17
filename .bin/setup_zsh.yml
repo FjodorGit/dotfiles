@@ -1,5 +1,6 @@
 - name: Retrieve the current user's name
   set_fact:
+    sudo_user: "{{ lookup('env', 'SUDO_USER') }}"
     current_user: "{{ lookup('env', 'USER') }}"
 
 - name: Install curl (for starship installation)
@@ -39,6 +40,7 @@
 
 - name: Run Oh My Zsh installation script
   ansible.builtin.shell: sh /tmp/install_ohmyzsh.sh --keep-zshrc
+  become_user: "{{ sudo_user }}"
 
 - name: Get starship install script
   ansible.builtin.get_url:
