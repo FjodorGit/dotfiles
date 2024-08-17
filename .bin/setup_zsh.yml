@@ -32,10 +32,13 @@
   ansible.builtin.shell: zsh --version
   changed_when: false
 
-- name: Install Oh My Zsh
-  ansible.builtin.shell: sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-  args:
-    creates: "/home/{{ current_user }}/.oh-my-zsh"
+- name: Download Oh My Zsh installation script
+  get_url:
+    url: https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh
+    dest: /tmp/install_ohmyzsh.sh
+
+- name: Run Oh My Zsh installation script
+  command: sh /tmp/install_ohmyzsh.sh --unattended
 
 - name: Get starship install script
   ansible.builtin.get_url:
