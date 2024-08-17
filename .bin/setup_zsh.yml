@@ -57,3 +57,9 @@
 - name: Assert starship is installed
   ansible.builtin.shell: starship --version
   changed_when: false
+
+- name: Install zioxide
+  ansible.builtin.shell: curl -sSfL https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | sh  
+
+- name: Add fzf-zsh-plugin
+  ansible.builtin.shell: git clone --depth 1 https://github.com/unixorn/fzf-zsh-plugin.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/fzf-zsh-plugin
