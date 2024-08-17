@@ -38,7 +38,7 @@
     dest: /tmp/install_ohmyzsh.sh
 
 - name: Run Oh My Zsh installation script
-  command: sh /tmp/install_ohmyzsh.sh --unattended
+  ansible.builtin.shell: sh /tmp/install_ohmyzsh.sh --keep-zshrc
 
 - name: Get starship install script
   ansible.builtin.get_url:
