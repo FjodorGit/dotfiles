@@ -1,6 +1,6 @@
 - name: Retrieve the current user's name
   set_fact:
-    current_user: "{{ lookup('env', 'SUDO_USER') }}"
+    current_user: "{{ lookup('env', 'USER') }}"
 
 - name: Install curl (for starship installation)
   become: true
