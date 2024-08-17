@@ -58,8 +58,17 @@
   ansible.builtin.shell: starship --version
   changed_when: false
 
-- name: Install zioxide
-  ansible.builtin.shell: curl -sSfL https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | sh  
+- name: Download Zoxide installation script
+  get_url:
+    url: https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh
+    dest: /tmp/install_zoxide.sh
 
-- name: Add fzf-zsh-plugin
-  ansible.builtin.shell: git clone --depth 1 https://github.com/unixorn/fzf-zsh-plugin.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/fzf-zsh-plugin
+- name: Run Zoxide installation script
+  ansible.builtin.shell: sh /tmp/install_zoxide.sh
+  become_user: "{{ sudo_user }}"
+
+- name: Git clone fzf-zsh-plugin
+  ansible.builtin.git:
+    repo: https://github.com/unixorn/fzf-zsh-plugin.git 
+    dest: '/home/{{ sudo_user }}/.oh-my-zsh/plugins/fzf-zsh-plugin'
+    depth: 1
