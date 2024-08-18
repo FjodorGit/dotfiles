@@ -1,0 +1,10 @@
+- name: Download rustup installation script
+  get_url:
+    url: https://sh.rustup.rs
+    dest: /tmp/rustup.sh
+
+- name: Run rustup installation script
+  ansible.builtin.shell: sh /tmp/rustup.sh
+
+- name: Run rustup update
+  ansible.builtin.shell: rustup update

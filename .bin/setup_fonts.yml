@@ -1,0 +1,16 @@
+- name: "Download JetBrainsNerdFont from github"
+  ansible.builtin.get_url:
+    url: "https://github.com/ryanoasis/nerd-fonts/releases/latest/download/JetBrainsMono.tar.xz"
+    dest: "/tmp/"
+  tags: nerdfonts
+
+- name: "Extract eza install files"
+  become: true
+  unarchive:
+    src: "/tmp/JetBrainsMono.tar.xz"
+    dest: "/usr/share/fonts"
+  tags: eza
+
+- name: Refresh font cache
+  ansible.builtin.shell: fc-cache -f -v
+

@@ -1,0 +1,15 @@
+- name: "Clone nvm release from repo (node version manager)"
+  vars:
+    nvm_version: v0.40.0
+    node_version: 20
+  ansible.builtin.get_url:
+    url: "https://raw.githubusercontent.com/nvm-sh/nvm/{{ nvm_version }}/install.sh"
+    dest: "/tmp/install_nvm.sh"
+  tags: nvm
+
+- name: Run nvm installation script
+  ansible.builtin.shell: sh /tmp/install_nvm.sh
+  become_user: fjk
+
+- name: Run nvm install node & npm
+  ansible.builtin.shell: nvm install 20

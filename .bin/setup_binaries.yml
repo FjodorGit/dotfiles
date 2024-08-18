@@ -1,5 +1,0 @@
-- name: Install chrome-gnome-shell (required for xremaps)
-  become: true
-  ansible.builtin.package:
-    state: latest
-    name: gnome-browser-connector

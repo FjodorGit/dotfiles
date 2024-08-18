@@ -1,3 +1,9 @@
+- name: Install chrome-gnome-shell (required for xremaps)
+  become: true
+  ansible.builtin.package:
+    state: latest
+    name: gnome-browser-connector
+
 - name: "Clone xremaps release from repo for gnome wayland"
   vars:
     xremaps_version: v0.10.0

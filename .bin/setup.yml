@@ -8,15 +8,20 @@
         update_cache: yes
         name:
           - bat
-        state: latest
+        state: absent
     - name: "Install cmake"
       apt:
         update_cache: yes
         name:
           - cmake
-        state: latest
-    - import_tasks: setup_binaries.yml
+        state: absent
+    - import_tasks: setup_brave.yml
     - import_tasks: setup_eza.yml
     - import_tasks: setup_kitty.yml
     - import_tasks: setup_neovim.yml
+    - import_tasks: setup_fonts.yml
+    - import_tasks: setup_yazi.yml
     - import_tasks: setup_zsh.yml
+    - import_tasks: setup_nvm.yml
+    - import_tasks: setup_rustup.yml
+    - import_tasks: cargo_binaries.yml
