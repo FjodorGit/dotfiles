@@ -14,11 +14,13 @@
         update_cache: yes
         name:
           - exa
-        state: latest
+        state: absent
     - name: "Install cmake"
       apt:
         update_cache: yes
         name:
           - cmake
         state: latest
+    - import_tasks: setup_binaries.yml
     - import_tasks: setup_zsh.yml
+    - import_tasks: setup_neovim.yml

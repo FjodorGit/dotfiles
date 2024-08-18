@@ -33,14 +33,21 @@
   ansible.builtin.shell: zsh --version
   changed_when: false
 
+- name: Check if the folder exists
+  stat:
+    path: /home/fjk/.oh-my-zsh
+  register: ohmyzsh_folder
+
 - name: Download Oh My Zsh installation script
   get_url:
     url: https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh
     dest: /tmp/install_ohmyzsh.sh
+  when: not ohmyzsh_folder.stat.exists
 
 - name: Run Oh My Zsh installation script
   ansible.builtin.shell: sh /tmp/install_ohmyzsh.sh --keep-zshrc
   become_user: "{{ sudo_user }}"
+  when: not ohmyzsh_folder.stat.exists
 
 - name: Get starship install script
   ansible.builtin.get_url:
@@ -72,3 +79,4 @@
     repo: https://github.com/unixorn/fzf-zsh-plugin.git 
     dest: '/home/{{ sudo_user }}/.oh-my-zsh/plugins/fzf-zsh-plugin'
     depth: 1
+  ignore_errors: yes

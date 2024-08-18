@@ -1,0 +1,13 @@
+- name: Retrieve the current user's name
+  set_fact:
+    sudo_user: "{{ lookup('env', 'SUDO_USER') }}"
+    current_user: "{{ lookup('env', 'USER') }}"
+
+- name: Download Kitty installation script
+  get_url:
+    url: https://sw.kovidgoyal.net/kitty/installer.sh
+    dest: /tmp/install_kitty.sh
+
+- name: Run Kitty installation script
+  ansible.builtin.shell: sh /dev/stdin /tmp/install_kitty.sh
+  become_user: "{{ sudo_user }}"
