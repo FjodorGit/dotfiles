@@ -3,8 +3,9 @@
   connection: local
   become: true
   tasks:
-    - import_tasks: setup_git.yml
     - import_tasks: setup_nvm.yml
+    - import_tasks: cargo_binaries.yml
+    - import_tasks: setup_git.yml
     - import_tasks: setup_rustup.yml
     - import_tasks: setup_brave.yml
     - import_tasks: setup_eza.yml
@@ -12,4 +13,3 @@
     - import_tasks: setup_neovim.yml
     - import_tasks: setup_fonts.yml
     - import_tasks: setup_zsh.yml
-    - import_tasks: cargo_binaries.yml
