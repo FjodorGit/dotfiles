@@ -3,6 +3,7 @@
   connection: local
   become: true
   tasks:
+    - import_tasks: setup_xremaps.yml
     - import_tasks: setup_nvm.yml
     - import_tasks: cargo_binaries.yml
     - import_tasks: setup_git.yml
