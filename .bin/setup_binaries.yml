@@ -7,6 +7,12 @@
   ansible.builtin.shell: sh /tmp/install_kitty.sh
   become_user: fjk
 
+- name: Create a new directory for eza
+  ansible.builtin.file:
+    path: /opt/eza/
+    state: directory
+    mode: '0755'
+
 - name: "Clone eza release from repo"
   vars:
     eza_version: v0.19.0
