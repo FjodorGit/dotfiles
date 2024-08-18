@@ -111,6 +111,7 @@ export PATH="/home/fjk/.chromedriver:$PATH"
 export PATH="/home/fjk/.syncthing:$PATH"
 export PATH="/home/fjk/Postman/:$PATH"
 export PATH="/home/fjk/.local/kitty.app/bin/:$PATH"
+export PATH="/opt/:$PATH"
 
 export QT_QPA_PLATFORM=wayland
 export SUDO_EDITOR="/home/fjk/neovim/bin/nvim"
