@@ -3,8 +3,8 @@
   connection: local
   become: true
   tasks:
-    - import_tasks: setup_nvm.yml
     - import_tasks: setup_git.yml
+    - import_tasks: setup_nvm.yml
     - import_tasks: setup_rustup.yml
     - import_tasks: setup_brave.yml
     - import_tasks: setup_eza.yml

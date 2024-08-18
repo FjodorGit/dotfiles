@@ -1,17 +1,49 @@
+- name: Install xclip (to copy ssh file content to clipboard)
+  become: true
+  ansible.builtin.package:
+    state: latest
+    name: xclip
+
 - name: Set Git user name
   ansible.builtin.git_config:
     name: user.name
-    value: "fjodorgit"
+    value: fjodorgit
     scope: global
+  become_user: fjk
 
 - name: Set Git user email
   ansible.builtin.git_config:
     name: user.email
-    value: "f.kholodkov@gmail.com"
+    value: 'f.kholodkov@gmail.com'
     scope: global
+  become_user: fjk
 
 - name: Enable Git color UI
   ansible.builtin.git_config:
     name: color.ui
     value: auto
     scope: global
+  become_user: fjk
+
+- name: Create a new directory for eza
+  ansible.builtin.file:
+    path: /home/fjk/.ssh
+    state: directory
+    mode: '0755'
+  become_user: fjk
+
+- name: Generate a new SSH key
+  ansible.builtin.openssh_keypair:
+    path: "/home/fjk/.ssh/id_rsa"
+    type: rsa
+    size: 4096
+    force: no
+  become_user: fjk
+
+- name: Add SSH key to the SSH agent
+  ansible.builtin.shell: |
+    eval "$(ssh-agent -s)"
+    ssh-add /home/fjk/.ssh/id_rsa
+  args:
+    executable: /bin/bash
+  become_user: fjk
