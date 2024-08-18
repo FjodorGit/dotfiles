@@ -15,7 +15,8 @@
         name:
           - cmake
         state: absent
-    - import_playbook: setup_git.yml
+    - name: Run Git configuration playbook
+      import_playbook: setup_git.yml
     - import_tasks: setup_brave.yml
     - import_tasks: setup_eza.yml
     - import_tasks: setup_kitty.yml
