@@ -1,0 +1,8 @@
+- name: Download Kitty installation script
+  get_url:
+    url: https://sw.kovidgoyal.net/kitty/installer.sh
+    dest: /tmp/install_kitty.sh
+
+- name: Run Kitty installation script
+  ansible.builtin.shell: sh /tmp/install_kitty.sh
+  become_user: fjk

@@ -29,6 +29,12 @@
     state: present
     insertafter: EOF  # Ensure the line is added at the end of the file
 
+- name: Create a history directory for zsh
+  ansible.builtin.file:
+    path: /home/fjk/.local/state/zsh
+    state: directory
+    mode: '0755'
+
 - name: Verify Zsh installation
   ansible.builtin.shell: zsh --version
   changed_when: false

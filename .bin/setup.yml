@@ -9,12 +9,6 @@
         name:
           - bat
         state: latest
-    - name: "Install exa"
-      apt:
-        update_cache: yes
-        name:
-          - exa
-        state: absent
     - name: "Install cmake"
       apt:
         update_cache: yes
@@ -22,5 +16,7 @@
           - cmake
         state: latest
     - import_tasks: setup_binaries.yml
-    - import_tasks: setup_zsh.yml
+    - import_tasks: setup_eza.yml
+    - import_tasks: setup_kitty.yml
     - import_tasks: setup_neovim.yml
+    - import_tasks: setup_zsh.yml
