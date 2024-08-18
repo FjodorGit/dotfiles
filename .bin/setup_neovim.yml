@@ -2,8 +2,8 @@
   vars:
     neovim_version: v0.10.1
   ansible.builtin.get_url:
-    url: "https://github.com/neovim/neovim/releases/download/{{ neovim_version }}/nvim-linux64.tar.gz" #v0.9.4
-    dest: "{{ tmp_dir }}"
+    url: "https://github.com/neovim/neovim/releases/download/{{ neovim_version }}/nvim-linux64.tar.gz"
+    dest: "/tmp/"
   tags: neovim
 
 - name: "Extract Neovim install files"
