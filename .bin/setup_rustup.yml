@@ -1,10 +1,14 @@
+- name: Check if the folder exists
+  stat:
+    path: /home/fjk/.cargo
+  register: rustup_folder
+
 - name: Download rustup installation script
   get_url:
     url: https://sh.rustup.rs
     dest: /tmp/rustup.sh
+  when: not rustup_folder.stat.exists
 
 - name: Run rustup installation script
-  ansible.builtin.shell: sh /tmp/rustup.sh
-
-- name: Run rustup update
-  ansible.builtin.shell: rustup update
+  ansible.builtin.shell: sh /tmp/rustup.sh -y
+  when: not rustup_folder.stat.exists

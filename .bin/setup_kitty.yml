@@ -4,5 +4,5 @@
     dest: /tmp/install_kitty.sh
 
 - name: Run Kitty installation script
-  ansible.builtin.shell: sh /tmp/install_kitty.sh
+  ansible.builtin.shell: sh /tmp/install_kitty.sh launch=n
   become_user: fjk

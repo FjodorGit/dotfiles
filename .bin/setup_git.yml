@@ -1,25 +1,17 @@
-- name: Configure Git settings
-  hosts: all
-  become: false
-  vars:
-    git_username: "fjodorgit"
-    git_email: "f.kholodkov@gmail.com"
+- name: Set Git user name
+  ansible.builtin.git_config:
+    name: user.name
+    value: "fjodorgit"
+    scope: global
 
-  tasks:
-    - name: Set Git user name
-      ansible.builtin.git_config:
-        name: user.name
-        value: "{{ git_username }}"
-        scope: global
+- name: Set Git user email
+  ansible.builtin.git_config:
+    name: user.email
+    value: "f.kholodkov@gmail.com"
+    scope: global
 
-    - name: Set Git user email
-      ansible.builtin.git_config:
-        name: user.email
-        value: "{{ git_email }}"
-        scope: global
-
-    - name: Enable Git color UI
-      ansible.builtin.git_config:
-        name: color.ui
-        value: auto
-        scope: global
+- name: Enable Git color UI
+  ansible.builtin.git_config:
+    name: color.ui
+    value: auto
+    scope: global
