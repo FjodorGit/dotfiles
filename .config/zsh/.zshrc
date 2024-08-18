@@ -92,6 +92,7 @@ setopt SHARE_HISTORY
 # User configuration
 
 # export MANPATH="/usr/local/man:$MANPATH"
+export PATH="/opt/:$PATH"
 export PATH="/home/fjk/neovim/bin:$PATH"
 export PATH="/home/fjk/.cargo/bin:$PATH"
 export PATH="/home/fjk/.local/bin:$PATH"
@@ -111,7 +112,6 @@ export PATH="/home/fjk/.chromedriver:$PATH"
 export PATH="/home/fjk/.syncthing:$PATH"
 export PATH="/home/fjk/Postman/:$PATH"
 export PATH="/home/fjk/.local/kitty.app/bin/:$PATH"
-export PATH="/opt/:$PATH"
 
 export QT_QPA_PLATFORM=wayland
 export SUDO_EDITOR="/home/fjk/neovim/bin/nvim"
