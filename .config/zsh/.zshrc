@@ -92,7 +92,8 @@ setopt SHARE_HISTORY
 # User configuration
 
 # export MANPATH="/usr/local/man:$MANPATH"
-export PATH="/opt/:$PATH"
+export PATH="/opt/eza:$PATH"
+export PATH="/opt/nvim-linux64/bin:$PATH"
 export PATH="/home/fjk/neovim/bin:$PATH"
 export PATH="/home/fjk/.cargo/bin:$PATH"
 export PATH="/home/fjk/.local/bin:$PATH"

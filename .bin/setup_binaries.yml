@@ -19,5 +19,5 @@
   become: true
   unarchive:
     src: "/tmp/eza_x86_64-unknown-linux-gnu.tar.gz"
-    dest: "/opt/"
+    dest: "/opt/eza"
   tags: eza
