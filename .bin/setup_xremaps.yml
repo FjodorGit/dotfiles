@@ -4,17 +4,39 @@
     state: latest
     name: gnome-browser-connector
 
-- name: "Clone xremaps release from repo for gnome wayland"
+- name: Create a new directory for xremap
+  ansible.builtin.file:
+    path: /opt/xremap/
+    state: directory
+    mode: '0755'
+
+- name: "Clone xremap release from repo for gnome wayland"
   vars:
     xremaps_version: v0.10.0
   ansible.builtin.get_url:
     url: "https://github.com/xremap/xremap/releases/download/{{ xremaps_version }}/xremap-linux-x86_64-gnome.zip"
     dest: "/tmp/"
-  tags: eza
+  tags: xremap
 
-- name: "Extract xremaps install files"
+- name: "Extract xremap install files"
   become: true
   unarchive:
-    src: "xremap-linux-x86_64-gnome.zip"
-    dest: "/opt/"
-  tags: eza
+    src: "/tmp/xremap-linux-x86_64-gnome.zip"
+    dest: "/opt/xremap"
+  tags: xremap
+
+- name: Create a systemd service file for xremap
+  ansible.builtin.template:
+    src: /home/fjk/backups/startup_service_template.j2
+    dest: /etc/systemd/system/xremap.service
+    mode: '0644'
+
+- name: Reload systemd to recognize the new service
+  ansible.builtin.systemd:
+    daemon_reload: yes
+
+- name: Enable and start xremap service
+  ansible.builtin.systemd:
+    name: xremap
+    enabled: yes
+    state: started

@@ -25,7 +25,7 @@
     scope: global
   become_user: fjk
 
-- name: Create a new directory for eza
+- name: Create a new directory for the ssh keys
   ansible.builtin.file:
     path: /home/fjk/.ssh
     state: directory
