@@ -233,9 +233,9 @@ require('mason-lspconfig').setup()
 local servers = {
   clangd = {},
   -- gopls = {},
-  pyright = {},
+  ruff = {}, --python
   rust_analyzer = {},
-  tsserver = {},
+  ts_ls = {},
   cssls = { filetypes = { 'css' } },
   tailwindcss = { filetypes = { 'html' } },
   html = { filetypes = { 'html', 'twig', 'hbs' } },
@@ -251,6 +251,7 @@ local servers = {
   sqlls = { filetypes = { 'sql' } },
   zls = {},
   yamlls = {},
+  texlab = { filetypes = { 'tex' } },
 }
 
 -- nvim-cmp supports additional completion capabilities, so broadcast that to servers

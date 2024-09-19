@@ -5,6 +5,9 @@ vim.keymap.set('n', '<leader>Q', '<cmd>q!<CR>', { desc = 'Force Quit' })
 -- Delete whole buffer
 vim.keymap.set('n', 'dB', 'ggVGd', { desc = 'Clear whole buffer' })
 
+-- Exit insert mode on german keyboard.
+vim.keymap.set('i', '<C-ü>', '<Esc>', { desc = 'Exit insert mode' })
+
 -- [[ Basic Keymaps ]]
 -- Keymaps for better default experience
 -- See `:help vim.keymap.set()`
@@ -58,23 +61,49 @@ end, { desc = '[G]it [C]ommit' })
 
 -- Obsidian
 vim.keymap.set('n', '<leader>on', '<cmd>ObsidianNew<CR>', { desc = '[O]bsidian [N]ew File' })
+vim.keymap.set('n', '<leader>ob', '<cmd>ObsidianBacklinks<CR>', { desc = '[O]bsidian [B]acklinks' })
+vim.keymap.set('n', 'gd', '<cmd>ObsidianFollowLink<CR>', { desc = '[G]oto [O]bsidian Note' })
+
+-- Molten
+vim.keymap.set('n', 'go', ':noautocmd MoltenEnterOutput<CR>', { desc = '[G]oto [O]utput window', silent = true })
+
+-- Quarto
+local runner = require 'quarto.runner'
+vim.keymap.set('n', '<localleader>rc', runner.run_cell, { desc = 'run cell', silent = true })
+vim.keymap.set('n', '<localleader>ra', runner.run_above, { desc = 'run cell and above', silent = true })
+vim.keymap.set('n', '<localleader>rA', runner.run_all, { desc = 'run all cells', silent = true })
+vim.keymap.set('n', '<localleader>rl', runner.run_line, { desc = 'run line', silent = true })
+vim.keymap.set('v', '<localleader>r', runner.run_range, { desc = 'run visual range', silent = true })
 
 -- document existing key chains
-require('which-key').register {
-  ['<leader>q'] = { name = '[Q]uit', _ = 'which_key_ignore' },
-  ['<leader>l'] = { name = '[L]sp', _ = 'which_key_ignore' },
-  ['<leader>d'] = { name = '[D]ocument', _ = 'which_key_ignore' },
-  ['<leader>g'] = { name = '[G]it', _ = 'which_key_ignore' },
-  ['<leader>h'] = { name = '[H]arpoon', _ = 'which_key_ignore' },
-  ['<leader>s'] = { name = '[S]earch', _ = 'which_key_ignore' },
-  ['<leader>t'] = { name = '[T]oggle', _ = 'which_key_ignore' },
-  ['<leader>w'] = { name = '[W]orkspace', _ = 'which_key_ignore' },
-  ['<leader>f'] = { name = '[F]iles', _ = 'which_key_ignore' },
-  ['<leader>o'] = { name = '[O]bsidian', _ = 'which_key_ignore' },
+require('which-key').add {
+  { '<leader>c', group = '[C]ode' },
+  { '<leader>c_', hidden = true },
+  { '<leader>d', group = '[D]ocument' },
+  { '<leader>d_', hidden = true },
+  { '<leader>f', group = '[F]iles' },
+  { '<leader>f_', hidden = true },
+  { '<leader>g', group = '[G]it' },
+  { '<leader>g_', hidden = true },
+  { '<leader>h', group = '[H]arpoon' },
+  { '<leader>h_', hidden = true },
+  { '<leader>l', group = '[L]sp' },
+  { '<leader>l_', hidden = true },
+  { '<leader>o', group = '[O]bsidian' },
+  { '<leader>o_', hidden = true },
+  { '<leader>q', group = '[Q]uit' },
+  { '<leader>q_', hidden = true },
+  { '<leader>s', group = '[S]earch' },
+  { '<leader>s_', hidden = true },
+  { '<leader>t', group = '[T]oggle' },
+  { '<leader>t_', hidden = true },
+  { '<leader>w', group = '[W]orkspace' },
+  { '<leader>w_', hidden = true },
 }
+
 -- register which-key VISUAL mode
 -- required for visual <leader>hs (hunk stage) to work
-require('which-key').register({
-  ['<leader>'] = { name = 'VISUAL <leader>' },
-  ['<leader>g'] = { '[G]it' },
-}, { mode = 'v' })
+require('which-key').add {
+  { '<leader>', group = 'VISUAL <leader>', mode = 'v' },
+  { '<leader>g', desc = '[G]it', mode = 'v' },
+}

@@ -124,7 +124,6 @@ export XDG_DATA_DIRS="/home/fjk/.local/share/flatpak/exports/share:$XDG_DATA_DIR
 
 #Alpaca API Keys
 export APCA_API_KEY_ID=PKUUBLH246T0PAIW9103
-export APCA_API_SECRET_KEY=gsXOs6G4cD3ds4F7NNFbwGG7X9bAfdGKTu3xKb6R
 
 #obsidian api key
 export OBSIDIAN_REST_API_KEY=3499d691621822ea827bae5de651ae78ae7cc2af4b905a007527a59311bd3168
@@ -137,6 +136,7 @@ export EDITOR="/home/fjk/neovim/bin/nvim"
 export LD_LIBRARY_PATH="/home/fjk/.scip/lib:$LIBRARY_PATH"
 export LD_LIBRARY_PATH="/opt/gurobi1100/linux64/lib:$LD_LIBRARY_PATH"
 export LD_LIBRARY_PATH="/opt/gurobi952/linux64/lib:$LD_LIBRARY_PATH"
+export LD_LIBRARY_PATH="/usr/lib/gcc/x86_64-linux-gnu/11:$LD_LIBRARY_PATH"
 
 # zoxide
 export _ZO_ECHO=1
